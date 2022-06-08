@@ -29,6 +29,13 @@
   - `\u`: Unicode value
   - `\x`: Hex value
 
+- Commands with `""`
+  - Contents are substituted before use
+
+- Commands with `{}`
+  - The contents are not substituted before use
+  - `puts {$my_var}  ->  "$my_var"`
+
 - Command within `[]`
   - Replaced with result of execution of that command
 
