@@ -12,6 +12,10 @@
   - `set my_var Mikkel`
   - `set my_var $Mikkel` 
 
+- `expr`: Command for doing math type operations
+  - Enclose expression in curly braces for correct evaluation and faster code
+  - `eq, ne`: Ensures that values are regarded as strings as a pose to `==` or `!=`
+  - `in, ni`: Is string in a list or not
 
 
 ## MISC
@@ -28,6 +32,11 @@
   - `\0`: Octal number
   - `\u`: Unicode value
   - `\x`: Hex value
+
+- `if` statements
+  - "no" and "yes" can also be used as the test expression
+  - Expression can be enclosed in braces or quotes. Quotes do an extra round of substitution and should be avoided
+
 
 - Commands with `""`
   - Contents are substituted before use
