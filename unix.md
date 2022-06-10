@@ -22,3 +22,4 @@
 
 - `tree`: Shows files in tree display
 
+- `printenv`: Print environment variables
