@@ -16,3 +16,9 @@
 
 - `diff`: Compares two files
   - `diff -y <file1> <file2>`: Outputs diff of file1 and file2 side-by-side
+
+- `find`: Find a file
+  - `find . -name "*.py"`: Finds all .py files from current directory and down
+
+- `tree`: Shows files in tree display
+
