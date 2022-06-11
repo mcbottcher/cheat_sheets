@@ -25,4 +25,21 @@ print(mydoubler(11))
 print(mytripler(11))
 ```
 
+## Map
+
+- `map(func, iter)`: Applies func to each element of iterable
+- Returns a map object, need to covert to another type to view, e.g. list()
+
+```
+def func(a):
+  return a+10
+  
+# prints [11, 12, 13]
+print(list(map(func, [1,2,3])))
+
+```
+
+- Can also use with Lambda function
+
+`print(list(map(lambda a:a+10, [1,2,3])))`
 
