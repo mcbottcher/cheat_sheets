@@ -72,7 +72,73 @@ print(list(filter(lambda a:a!=0, [0, 1, 2])))
 
 ## String formatting
 
-- `print(f"Hello {my_string}")`{:.language-python}
+- `print(f"Hello {my_string}")`
 
-## 
+## Checking for a type
+
+- Use `isinstance(object, class_type)`
+- Don't use `==`
+
+## Equality vs Identity
+
+- `is` checks that two variables point to the same object in memory
+  - Use `is` when checking for `None True False` -> `if my_var is None:`
+- `==` or `!=` check that the value of two objects are the same
+
+## Range Length Looping
+
+- Better to NOT use something like `for i in range(len(a))`
+- Instead use `for v in a:` or similar
+- If you need the index, you can use enumerate to get the element and the index at the same time:
+
+```python
+a = [1, 2, 3]
+for index, element in enumerate(a):
+  ...
+```
+
+## Zip
+
+- Returns a zip object, which is an iterator of tuples
+- Each tuple contains the elements from the same index in the given input iterators
+- If given input iterators have different lengths, zip iterator will be of length of the shortest input iterator
+- Cannot be accessed with indexes so need to covert to a list or similar, or use in a loop
+
+```python
+a = ("John", "Charles", "Mike")
+b = ("Jenny", "Christy", "Monica")
+
+x = zip(a, b)
+
+for av, bv in x:
+  ...
+```
+
+## Timing code
+
+- Use `time.perf_counter()` to time code
+
+```python
+start = time.perf_counter()
+...
+end = time.perf_counter()
+print(end - start)
+```
+
+## Logging
+
+- Use logging instead of print statements for debug
+- Can use different levels of log, and your own formatting
+
+```python
+def my_func():
+  logging.debug("debug info")
+  logging.info("general info")
+  logging.error("not good")
+
+def main():
+  level = logging.DEBUG
+  fmt = '[%(levelname)s] %(asctime)s - %(message)s'
+  logging.basicConfig(level=level, format=fmt)
+```
 
