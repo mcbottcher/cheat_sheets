@@ -10,3 +10,18 @@
 ## Rust Formatting
 
 - `rustfmt <source_file>`
+
+## Variables
+
+- Variables have types, can manually assign these or let the compiler decide
+  - `let x = 4;`: Compiler will make x and integer type
+  - `let x: u32 = 4;`: Manually assign to 32 bit unsigned int
+
+## Printing
+
+- String formatting
+
+```rust
+let x = 4;
+println!("x is: {}", x);
+```
