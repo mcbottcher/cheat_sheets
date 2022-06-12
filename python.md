@@ -70,5 +70,9 @@ print(list(filter(lambda a:a!=0, [0, 1, 2])))
 - Sets cannot have duplicate entries -> they will be ignored if there is a duplicate
 - Can also use the `set()` object: `my_set = set(("banana", "apple", 2, True))`
 
+## String formatting
 
+- `print(f"Hello {my_string}")`{:.language-python}
+
+## 
 
