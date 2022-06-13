@@ -240,3 +240,13 @@ for i in gen():
   # prints 1, 2, 3
   print(i)
 ```
+
+- Can also use generator comprehensions
+
+```python
+gen = (i for i in range(10) if i%2)
+
+for i in gen:
+  # prints 1, 3, 5, 7, 9
+  print(gen)
+```
