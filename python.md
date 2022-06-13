@@ -29,6 +29,7 @@ print(mytripler(11))
 
 - `map(func, iter)`: Applies func to each element of iterable
 - Returns a map object, need to covert to another type to view, e.g. list()
+- map object is an iterator -> it doesn't store the new data, just how to data is mapped, so when extracting a value it will map the value on the fly
 
 ```python
 def func(a):
@@ -142,3 +143,100 @@ def main():
   logging.basicConfig(level=level, format=fmt)
 ```
 
+## Exceptions
+
+```python
+try:
+  ...
+except FileNotFoundError:
+  ...
+except Exception as e:
+  print(e)
+```
+
+- Used to handle errors in pieces of code you think an error could occur in
+- Can use multiple except statements to catch different errors -> put more generic ones like `Exception` towards the bottom
+- use the `else` to run code if the try block finishes without raising and exception
+- use `finally` to run if code is successful or if exception is thrown
+
+```python
+try:
+  ...
+except FileNotFoundError:
+  ...
+else:
+  print('Try succeeded')
+finally:
+  print('This always runs')
+```
+
+- Raise your own exceptions: `raise Exception`
+
+```python
+class MyCustomError(Exception):
+  pass
+
+try:
+  if 1 == 2:
+    raise MyCustomError
+except MyCustomError:
+  print('My custom exception was triggered')
+```
+
+## List comprehension
+
+- Create a new list where each element which passes a filter is altered by a function
+
+```python
+nums = [1, 2, 3, 4]
+# For all elements in nums which are even, double them and put them in my_list
+my_list = [x*2 for x in nums if x%2 == 0]
+
+# my_list = [4, 8]
+```
+
+## Iterator
+
+- e.g. `map()`
+- A type that allows iteration but doesn't store any raw data
+- Iterator stores where in sequence you are:
+
+```python
+x = [1, 2, 3, 4, 5]
+y = map(lambda i: i*2, x)
+
+# can also use y.__next__()
+next(y)
+
+# This loop will start at second iteration of y .i.e. 2*2 = 4
+for i in y:
+  print(y)
+```
+
+- use `iter()` to make an iterator e.g.: `x = iter(range(1, 11))`
+- Exception `StopIterator` will stop an interator -> how a for loop stops for example
+
+## Generator
+
+```python
+def generator(n):
+  for i in range(n):
+    # pauses function and returns i to the calling function
+    yield i
+
+for i in gen(5):
+  print(i)
+```
+- Yield pauses function, saves context of function, uses the value, then comes back to continue the function
+- Could also implement like this, remembering yield pauses then continues
+
+```python
+def gen():
+  yield 1
+  yield 2
+  yield 3
+
+for i in gen():
+  # prints 1, 2, 3
+  print(i)
+```
