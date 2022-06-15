@@ -82,3 +82,38 @@ fn main(){
 let x = 4;
 println!("x is: {}", x);
 ```
+
+## Comments
+
+- Inline `//`
+
+## Arithmetic
+
+- Data types should be the same to perform arithmetic together
+- Result will be the same type as operands
+
+```rust
+let x:u8 = 255;
+let x:u8 = 1;
+
+let z = x + y;
+```
+
+- Note, this generates an overflow error!
+
+## Type Casting
+
+- Can indicate variable type after use: `let x = 255u8;`
+  - Different syntax: `let x = 255_u8;`
+  - Different syntax: `let x = 255 as u8;`
+
+```rust
+let x = 3 as u8;
+let y = 4 as u16;
+
+// Z will be 7 of type u16
+let z = (x as u16) + y;
+```
+- Better to convert smaller type to larger to avoid overflow
+  - RUST still doesn't catch all overflows!
+
