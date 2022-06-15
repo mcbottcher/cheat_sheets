@@ -23,3 +23,11 @@
 - `tree`: Shows files in tree display
 
 - `printenv`: Print environment variables
+
+- `curl`: cURL lets us query URLs from the command line
+  - `curl www.google.com`: Returns HTML/Scripts of google.com
+  - option `-i` gives information header
+  - option `-d or --data` can be used to post data to a url
+    - `curl -d "first=Bob&last=Ross" http://<url>`
+  - pass in username and password: `curl -u <username>:<password> <url>`
+  - Download response e.g. picture: `curl -o test.jpg <url>` -> outputs response to test.jpg
