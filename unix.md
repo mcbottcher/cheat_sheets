@@ -40,3 +40,6 @@
     - Or regular grep:
       - `grep 'pattern1\|pattern2' fileName`
       - `grep -e 'pattern1' -e 'pattern2' fileName`
+  - Use `-c` to get a count of number of grep matches
+  - Can also search multiple files: `grep -c 'warning\|error' /var/log/*log` -> Searches all log files...
+    - Use the -R flag to recursivly search subdirectories too
