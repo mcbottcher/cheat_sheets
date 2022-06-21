@@ -117,3 +117,39 @@ let z = (x as u16) + y;
 - Better to convert smaller type to larger to avoid overflow
   - RUST still doesn't catch all overflows!
 
+## Conditions
+
+- Can use `< > <= >= == !=` (like C)
+- Can use logical operators: `&& || !` (like C)
+- Can use `if, else if, else` (like C)
+
+## Functions
+
+- Snake Case convention for function naming: `fn my_func()`
+- Doesn't matter where function is defined, i.e. above or below usage
+- Arguments: `fn add_numbers(x: i32, y: i32)`
+- Returning values from function:
+  - `-> <return type>`
+  - Use expression to return -> no `;`!
+  - Can also use `return` keyword -> then you can use the semicolon
+
+```rust
+fn add_numbers(x: i32, y: i32) -> i32 {
+  x + y
+}
+
+fn add_numbers2(x: i32, y: i32) -> i32 {
+  return x + y;
+}
+```
+
+## Expression
+
+```rust
+let number = {
+  let x = 3;
+  x + 1 // Note no ;
+};
+
+println!("{}", number); // prints 4
+```
