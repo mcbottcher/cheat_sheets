@@ -31,3 +31,12 @@
     - `curl -d "first=Bob&last=Ross" http://<url>`
   - pass in username and password: `curl -u <username>:<password> <url>`
   - Download response e.g. picture: `curl -o test.jpg <url>` -> outputs response to test.jpg
+
+- `grep`: Search for word or expression in a file
+  - `grep "expression" <file>`
+  - Use `-i` to search for expression without being case sensitive
+  - Can use it with pipe: `cat my_file.txt | grep "hello world"`
+  - Use with extended regualar expressions: `grep -E 'pattern1|pattern2' fileName`
+    - Or regular grep:
+      - `grep 'pattern1\|pattern2' fileName`
+      - `grep -e 'pattern1' -e 'pattern2' fileName`
