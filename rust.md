@@ -6,6 +6,9 @@
 - Build rust project: `cargo build` -> executable in `target/debug`
 - Build and run: `cargo run`
 - Can check if compile is possible: `cargo check`
+- By default a rust project is built in debug mode
+  - This includes extra info for debug
+  - To create an optimised release: `cargo build --release`
 
 ## Rust Formatting
 
