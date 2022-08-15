@@ -160,3 +160,24 @@ println!("{}", number); // prints 4
 ## Rust naming conventions
 
 [Naming conventions](https://rust-lang.github.io/api-guidelines/naming.html)
+
+## Print formatting
+
+- Print floating point value to 3 decimal places: `println!("c is {:.3}", c)`
+- Print with only a certain number of characters: `println!("c is {:8.3}", c)` (pads with spaces)
+  - Pad with zeros: `println!("c is {:08.3}", c)`
+- No automatic newline: `print!("This does not have a newline at the end")`
+- Can reference variables more than once in the print macro:
+
+```rust
+println!("a is {0}, c is {1}, a is {0}", a, c)
+```
+
+[Rust formatting standards](https://doc.rust-lang.org/std/fmt/)
+
+- Can also use argurments from the local scope:
+
+```rust
+let x = 8;
+println!("x is {x}");
+```
