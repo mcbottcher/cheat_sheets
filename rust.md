@@ -156,3 +156,7 @@ let number = {
 
 println!("{}", number); // prints 4
 ```
+
+## Rust naming conventions
+
+[Naming conventions](https://rust-lang.github.io/api-guidelines/naming.html)
