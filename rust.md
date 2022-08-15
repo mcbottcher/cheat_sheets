@@ -192,3 +192,11 @@ println!("x is {x}");
 - XOR: `^`
 - Shifts: `<<` or `>>`
 
+## Boolean operators
+
+- Use `! & | ^` for evaluating boolean types: `let c = true & false;`
+- Short circuit operators: `!! && || ^^`
+  - If first expression is evaluated and next does not need to be it is not: `if (true) || (expression1)` -> expression1 not needed to be evaluated, since it will always be true...
+    - proof: `if true || panic!()` -> panic! not evaluated, causes an error and exits program
+- Can use comparison operators with booleans too: `==, !=, <, >`
+
