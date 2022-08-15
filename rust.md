@@ -181,3 +181,14 @@ println!("a is {0}, c is {1}, a is {0}", a, c)
 let x = 8;
 println!("x is {x}");
 ```
+
+- Output binary representation: `println!("{:08b}", a)`
+
+# Bitwise operators
+
+- NOT: `x = !x` -> flips the bits (like ~ in C)
+- AND: `&`
+- OR: `|`
+- XOR: `^`
+- Shifts: `<<` or `>>`
+
