@@ -200,3 +200,10 @@ println!("x is {x}");
     - proof: `if true || panic!()` -> panic! not evaluated, causes an error and exits program
 - Can use comparison operators with booleans too: `==, !=, <, >`
 
+## Char Data Type
+
+- Takes up 4 bytes of memory: Unicode scalar value
+
+```rust
+let finger = '\u{261D}'; // Display unicode character 0x261D
+```
