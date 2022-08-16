@@ -207,3 +207,18 @@ println!("x is {x}");
 ```rust
 let finger = '\u{261D}'; // Display unicode character 0x261D
 ```
+
+## Arrays
+
+```rust
+let letters = ['a', 'b', 'c'];
+
+// Uninitialised array
+let numbers: [i32; 5]; // type i32, 5 elements
+
+// initalise array with zeros using repeat expression
+numbers = [0; 5]; // five copies of zero
+```
+
+- To index an array in rust, need to use the `usize` type
+
