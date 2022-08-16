@@ -230,3 +230,22 @@ let garage : [[[i32; 100]; 20]; 5]; // uninitialised array of 100x20x5
 // initalised array with zeros
 let garage = [[[0; 100]; 20]; 5];
 ```
+
+## Tuples
+
+- Group multiple elements of mixed data types
+- Elements are ordered
+- Stored in fixed-length, contiguous section of memory
+- Data types of items must be known at compile time
+
+```rust
+let my_tuple = (10, 3.14, 'x');
+println!("{stuff.0}"); // Notice zero indexed
+
+let mut my_tuple: (u8, f32, char) = (10, 3.14, 'x');
+my_tuple.0 += 2; // now my_tuple.0 is 12
+
+let (a, b, c) = my_tuple;
+// Now a == 12
+```
+
