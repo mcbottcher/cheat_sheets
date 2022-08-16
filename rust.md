@@ -220,5 +220,13 @@ let numbers: [i32; 5]; // type i32, 5 elements
 numbers = [0; 5]; // five copies of zero
 ```
 
+- Arrays must have the same data type
 - To index an array in rust, need to use the `usize` type
+- Multi-dimensional arrays also possible
 
+```rust
+let garage : [[[i32; 100]; 20]; 5]; // uninitialised array of 100x20x5
+
+// initalised array with zeros
+let garage = [[[0; 100]; 20]; 5];
+```
