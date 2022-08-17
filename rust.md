@@ -300,3 +300,80 @@ fn main(){
   - Does not end with a semicolon
     - `1 + 2` returns 3
     - `1 + 2;` returns nothing
+
+## Conditional execution
+
+```rust
+if x == 3 {
+    println!("X is 3");
+}
+```
+
+- Cannot use integer value as boolean, must cast to boolean:
+
+```rust
+let x = 3;
+
+// This will NOT work
+if x {
+  println!("If worked");
+}
+
+// This will work
+if x != 0 {
+  println!("It worked);
+}
+```
+
+- Can use `else` and `else if` as in C
+- Can use `if` in assignment:
+
+```rust
+let x = if my_bool {1} else {2};
+```
+
+## Loops
+
+- `loop`
+  - Infinite loop, until broken with `break` or `return`
+  - Can pass out a variable when the loop finishes
+
+```rust
+let mut count = 0;
+let result = loop{
+    count += 1;
+    println!("Count is {count}");
+    if count == 10 {
+        break count * 10;
+    }
+}
+```
+
+- `while` loop
+  - Cannot return a value with the `break` statement
+
+```rust
+while count < 10 {
+    count += 1;
+}
+```
+
+- `for` loop
+  - Converts message array into an iterator
+    - Has a function called `next()` to go to the next iteration
+    - `iter()` is a more recent rust addition
+
+```rust
+let message = ['h', 'e', 'l', 'l', 'o'];
+
+for (index, &item) in message.iter().enumerate() {
+    println!("Item {index} is {item}");
+}
+```
+
+```rust
+// This will print 0, 1, 2, 3, 4 -> NOT 5
+for number in 0..5 {
+    println!("{number}");
+}
+```
