@@ -249,3 +249,54 @@ let (a, b, c) = my_tuple;
 // Now a == 12
 ```
 
+## Functions
+
+- Declare functions: `fn my_function(){}`
+- Function doesn't need to be declared before it is called
+- Function parameters:
+
+```rust
+fn say_number(number: i32){
+    println!("Number is {number}");
+}
+```
+
+- Function return types:
+
+```rust
+// Input parameter x is i32, function returns an i32
+fn square(x: i32) -> i32 {
+    println!("Value of x is {x}");
+    x * x // Notice no semicolon. This makes this an expression, and x*x is returned
+
+    // Can also use: return x*x;
+}
+```
+
+- Can also return tuples
+
+```rust 
+fn square(x: i32) -> (i32, i32) {
+    return (x, x*x); // Returns x and x squared
+}
+
+fn main(){
+    // :? allows us to print the tuple -> debug formatting
+    println!("Result is {:?}", sqaure(13));
+}
+```
+
+- Unit data type: returned when no return type is specified
+  - Represented with `()`
+  - `fn my_function(x: i32) -> (){}`
+
+## Statements vs expressions
+
+- Statement
+  - Performs an action without returning a value
+  - End with a semicolon
+- Expression
+  - Evaluates to a resulting value
+  - Does not end with a semicolon
+    - `1 + 2` returns 3
+    - `1 + 2;` returns nothing
