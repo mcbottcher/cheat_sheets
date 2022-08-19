@@ -394,3 +394,27 @@ for row in matrix.iter_mut() {
 }
 
 ```
+
+## Variable Shadowing
+
+- Can declare a variable with the same name as an existing one
+- The new variable "shadows" the previous one, as long as the new one is in scope
+- Could lead to bugs if you are not careful with naming of variables...
+
+```rust
+let planet = "Earth";
+let planet = "Mars";
+println!("Planet is {planet}");
+
+// Can change type and mutability
+let mut planet = 4;
+println!("Planet is {planet}");
+
+{
+    let planent = 6;
+}
+
+// This will still be 4 since the shadowed 6 is out of scope
+println!("Planet is {planet}");
+```
+
