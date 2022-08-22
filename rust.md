@@ -444,7 +444,7 @@ println!("{message");
 ```rust
 let outer_planet: String;
 {
-    let inner?planet = String:from("Earth");
+    let inner_planet = String:from("Earth");
     outer_planet = inner_planet; // Pointer to data of inner_planet is moved to outer_planet, so now inner_planet is invalid, since data can only have one owner
 }
 ```
@@ -452,7 +452,7 @@ let outer_planet: String;
 ```rust
 let outer_planet: String;
 {
-    let inner?planet = String:from("Earth");
+    let inner_planet = String:from("Earth");
     outer_planet = inner_planet.clone(); // Allocates memory on the heap and copies the contents of inner_planet to outer_planet, so we have two copies of the string "Earth" on the heap
 }
 ```
@@ -464,3 +464,22 @@ let outer_planet: String;
   - Passing heap based variable like a String, then the variable is moved like we saw above, so the function parameter is the new owner of the heap data. The original variable is invalid. At the end of the function the data will be thrown away with the variable local the function
     - Can tranfer ownership back from function with a return value...
   
+## Borrowing
+
+- Access data without taking ownership of it
+- Use the borrow operator: `&`
+- Need to use mutable borrow operator when we want to change the value: `&mut`
+  - Cannot create other references when using a mutable reference, to prevent data races, in threads for example...
+
+## Slice
+
+- Reference a contiguous section of a collection, e.g. an array or string
+- String slice data type: `&str`
+  - String slice is done in bytes, so if using more complex characters which span more than one byte you need to be careful with your slice indexes
+
+```rust
+let message = String::from("Greetings from Earth!");
+let last_word = &message[15..20]; // To go to the end use &message[15..]
+println!("{last_word}"); // Should print "Earth"
+```
+
