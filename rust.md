@@ -483,3 +483,35 @@ let last_word = &message[15..20]; // To go to the end use &message[15..]
 println!("{last_word}"); // Should print "Earth"
 ```
 
+## Rust Standard Library
+
+- [Standard Modules](https://doc.rust-lang.org/std/#modules)
+- Need to use the `use` keyword to use a module (not in the prelude): `use std::thread`
+- The Prelude: List of things automatically imported into every rust project
+
+## Standard Input
+
+- `use std::io;`
+
+```rust
+let mut buffer = String::new();
+println!("Enter your message");
+io::stdin().read_line(&mut buffer);
+println!("buffer is {buffer}");
+
+// parse this string into an i32
+// parse returns a result enum, i.e. could be an error, if you used an invalid character (not a number)
+// unwrap extracts the integer from the enum
+let number = buffer.trim().parse::<i32>().unwrap();
+println!("You gave {number}");
+```
+
+## Crates
+
+- Collection of rust source code files
+  - Binary crates compile to produce an executable program
+  - Library crate contain code for other programs to use
+- Crates.io is the registry for libraries e.g. random number crate
+- Add a crate to project by adding it to Cargo.toml
+
+
