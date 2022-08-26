@@ -583,3 +583,67 @@ fn main(){
   file.write(b"\npluto");
 }
 ```
+
+## Structs
+
+- Elements are named so don't need to worry about the order they are stored like a tuple
+
+```rust
+struct Shuttle {
+    name: String,
+    crew_size: u8,
+    propellant: f64
+}
+
+fn main(){
+    let vehicle = Shuttle {
+      name : String::from("Endeavour"),
+      crew_size: 7,
+      propellant: 8675.0
+    };
+
+    println!("name is {}", vehicle.name);
+
+    // Can copy elements from another struct of the same type to a new one
+    // ..vehicle copies all uninitialised struct members in vehicle2 from vehicle
+    let vehicle2 = Shuttle {
+        name: String::from("Discovery"),
+        ..vehicle
+    }
+
+    // to copy all elements including those stored on the stack e.g. String, use the clone method
+    let vehicle3 = Shuttle {
+       ..vehicle.clone()
+    }
+}
+```
+
+- As well as storing data, structs can also be used for calling functions: methods
+- First parameter in method is always a reference to the struct to be able to access the struct data
+
+```rust
+// Following from the shuttle struct above
+impl Shuttle {
+    fn get_name(&self) -> &str{
+        &self.name
+    }
+
+    fn add_fuel(&mut self, gallons: f64){
+        self.propellant += gallons;
+    }
+
+    // Associated function
+    fn new(name: &str) -> Shuttle {
+        Shuttle {
+            name: String:from(name),
+            crew_size: 7,
+            propellant: 0.0,
+        }
+    }
+}
+```
+
+- Can also use Associated functions, but the difference here is they do not have the `&self` parameter, so cannot access the data of the struct itself. This is like a class function whereas the methods are object functions.
+
+## Tuple Structs
+
