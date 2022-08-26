@@ -515,3 +515,24 @@ println!("You gave {number}");
 - Add a crate to project by adding it to Cargo.toml
 
 
+## Command Line Arguments
+
+- Can be read using `std::env::args` module
+  - This returns an iterator over the arguments passed to the program
+- First argument is traditionally the executable path (Not always though)
+
+```rust
+use std::env;
+
+fn main() {
+
+  if env::args().len() <=2{
+    println!("Not enough arguments");
+    return;
+  }
+
+  for(index, argument) in env::args().enumerate() {
+    println!("Argument {index} is {argument}");
+  }
+}
+```
