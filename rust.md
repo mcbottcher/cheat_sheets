@@ -647,3 +647,14 @@ impl Shuttle {
 
 ## Tuple Structs
 
+- Use this when you want a name for a type of tuple but don't want to name the elements of that tuple... e.g. a colour tuple with rgb fields
+
+```rust
+struct Colour(u8, u8, u8);
+
+fn main() {
+    let red = Colour(255, 0 ,0);
+
+    println!("Red component is {red.0}");
+}
+```
