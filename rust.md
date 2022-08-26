@@ -658,3 +658,69 @@ fn main() {
     println!("Red component is {red.0}");
 }
 ```
+
+## Struct with generic types
+
+```rust
+// List of distinct types goes here
+struct Rectangle<T, T2> {
+    width: T,
+    height: T2,
+}
+```
+
+## Generic method
+
+```rust
+impl<T, U> Rectangle<T, U> {
+    // Need &T since we don't know if it will be a heap based or stack based data type
+    fn get_width(&self) -> &T {
+        &self.width
+    }
+}
+
+// One specific for u8, u8 type rectangle
+impl Rectangle<u8, u8> {
+    fn get_perimeter(&self) -> u8 {
+       2 * (self.height + self.width)
+    }
+}
+```
+
+## Generic functions
+
+```rust
+fn get_biggest<T: PartialOrd>(a: T, b: T) -> T {
+    if a > b {
+        a
+    } else {
+        b
+    }
+}
+```
+
+- This will only work with datatypes that can be compared, so we add the `PartialOrd trait`. So only datatypes that can be compared with the `>` operator
+
+## Box<T> Data Type
+
+- Allows you to store data on the heap, even if it is a data type that would normally be stored on the stack
+- It is pointer on the stack
+- Smart pointer: Box has ownership of data it points to, and when it goes out of scope, it will atomatically deallocate the memory.
+- Box::new -> Calling this allocates the correct amount of memory on the heap, and moves the data, becoming the new owner and the old variable becomes invalid..
+
+
+```rust
+// Continuing above example of shuttle struct
+let boxed_vehicle: Box<Shuttle> = Box::new(vehicle);
+
+// dereference operator -> *
+println!("Size of pointer {}", &boxed_vehicle);
+println!("Size of memory on the heap {}", &*boxed_vehicle);
+
+// move heap data back to stack, passing ownership to unboxed_vehicle
+let unboxed_vehicle: Shuttle = *boxed_vehicle;
+```
+
+- Uses
+  - Store a type whose size cannot be known at compile time
+  - Transfer ownership of data to heap where it can more easily transfered, i.e. don't need to do large amounts of copying on the stack
