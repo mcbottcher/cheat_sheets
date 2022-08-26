@@ -536,3 +536,50 @@ fn main() {
   }
 }
 ```
+
+## Reading and Writing Files
+
+- `use std::fs;`: Standard filesystem
+
+```rust
+use std::fs;
+
+fn main(){
+  let contents = fs::read_to_string("planets.txt").unwrap();
+  println!("Contents is {contents}");
+
+  for line in contents.lines() {
+    println!("line is {}", line);
+  }
+
+  // For files not using plain text, we read it as bytes (u8) and not as a string
+  let contents = fs::read("planets.txt").unwrap();
+  println!("contents is {:?}", contents);
+}
+```
+
+- Use standard library paths module to work with and minipulate file paths
+
+- Writing to file:
+
+```rust
+let mut speech = String::new();
+speech.push_str("Hello my name is Mikkel\n");
+
+fs::write("speech.txt", speech);
+```
+
+- Appending data to a file:
+
+```rust
+use std::io::prelude::*;
+
+fn main(){
+  // Sets options for file writing
+  // Unwrap at the end converts from result enum to file type
+  let mut file = fs::OpenOptions::new().append(true).open("planets.txt").unwrap();
+  
+  // Can only write arrays of bytes so use the `b` to indicate that this string should be interpreted as a byte array
+  file.write(b"\npluto");
+}
+```
