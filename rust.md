@@ -724,3 +724,85 @@ let unboxed_vehicle: Shuttle = *boxed_vehicle;
 - Uses
   - Store a type whose size cannot be known at compile time
   - Transfer ownership of data to heap where it can more easily transfered, i.e. don't need to do large amounts of copying on the stack
+
+## Traits
+
+- A collection of methods
+- A data type can implement a trait
+- Generics use traits to specify the capabilities of unknown data types
+- There are common traits, but you can also implement your own custom traits to specify capabilities
+
+```rust
+// Any struct which implements the Description trait will have a function called describe
+trait Description {
+    fn describe(&self) -> String;
+}
+
+impl Description for Satellite {
+    fn describe(&self) -> String {
+        // create formatting string to print the struct
+        format!{"The {self.name} is flying at {self.velocity}m/s"}
+    }
+} 
+```
+
+- Default implementation for trait methods
+
+```rust
+trait Description {
+    // If describe is not implemented, it will use this method
+    fn describe(&self) -> String {
+        format!("This is a default describe method")
+    }
+}
+
+impl Description for Satellite {
+
+}
+```
+
+- New structs have no traits by default, need to add them yourself. eg. Partial Equality trait
+- Derivable traits: Provide default implementations for several common traits
+
+```rust
+#[derive(PartialEq, PartialOrd)]
+struct Satellite {
+    name: String,
+    velocity: f64
+}
+
+fn main (){
+    // now we can compare two Satellite types in our code
+    if sat1 == sat2 {
+        ...
+    }
+
+    // can do this now with partialord
+    if sat1 > sat2 {
+        ...
+    }
+}
+```
+
+- Multiple trait bounds on a generic type:
+  - Separated by `+`: `fn my_func<T: trait_one + trait_two>`
+  - Converting types:
+    - `if a == T::from(b)`, type of b need to implement trait that it can be converted to type T. This trait is the `From<U>`. Also need to be able to move U type to T type, so U needs the `Copy` trait
+
+- Can also use the `where` keyword to describe which traits to use
+
+```rust
+fn compare_and_print<T, U>(a: T, b: U)
+    where T: fmt::Display + PartialEq + From<U>
+          U: fmt::Display + PartialEq + Copy
+    { ...
+```
+
+- Return types with implemented traits:
+
+```rust
+// Can only return a type that implements the display type
+fn get_displayable() -> impl fmt::Display {
+    ...
+}
+```
