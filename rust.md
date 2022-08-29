@@ -806,3 +806,49 @@ fn get_displayable() -> impl fmt::Display {
     ...
 }
 ```
+
+## The Borrow Checker
+
+- Compares the scopes of variables to determine if all borrows are valid
+- Can annotate the lifetime of variables:
+  - Name must begin with `'` symbol
+  - Convention is to use a single, lowercase letter for the lifetime: `'a`
+
+
+```rust
+// Tells rust compiler how the lifetimes of the inputs and outputs relate to each other
+// Here lifetime of inputs and outputs are the same
+// If lifetimes of inputs are different, shorter lifetime is used
+fn best_fuel<'a>(x: &'a str, y: &'a str) -> &'a str{
+    ...
+}
+
+or
+
+fn best_fuel<'a, 'b>(x: &'a str, y: &'b str) -> &'a str{
+    ...
+}
+```
+
+- Struct lifetimes and methods:
+
+```rust
+struct Shuttle<'a> {
+    name: &'a str
+}
+
+// Here we need a second lifetime indicator 'b to show that output will
+// not match lifetime of the shuttle struct
+impl<'a, 'b> Shuttle<'a> {
+    fn send_transmission(&'a self, msg: &'b str) -> &'b str {
+        println!("Transmitting message: {}", msg);
+        msg
+    }
+}
+```
+
+- `'static` is a reserved lifetime keyword
+  - Indicates references available for entire duration of the program
+  - e.g. a string literal is stored in the program's binary, so never is lost
+    - `let s: &'static = "Greetings";`
+  - Can also be used in traits for generic types: `T: Display + 'static`
