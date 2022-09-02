@@ -852,3 +852,5 @@ impl<'a, 'b> Shuttle<'a> {
   - e.g. a string literal is stored in the program's binary, so never is lost
     - `let s: &'static = "Greetings";`
   - Can also be used in traits for generic types: `T: Display + 'static`
+
+## Next topic
