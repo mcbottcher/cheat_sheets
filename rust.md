@@ -948,3 +948,10 @@ let number = match number {
 }
 ```
 
+- `if let` expression
+
+```rust
+if let Some(13) = number {
+    println!("Thirteen");
+}
+```
