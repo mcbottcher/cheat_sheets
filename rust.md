@@ -853,4 +853,98 @@ impl<'a, 'b> Shuttle<'a> {
     - `let s: &'static = "Greetings";`
   - Can also be used in traits for generic types: `T: Display + 'static`
 
-## Next topic
+## Enums
+
+```rust
+#[derive(Debug)]
+enum Shape {
+    Circle(f64),
+    Rectangle(f64, f64),
+    Triangle(f64, f64, f64)
+}
+
+fn main(){
+    let my_shape = Shape::Rectangle(1.2, 2.3);
+    println!("My shape is {:?}", my_shape);
+
+    // match example
+    match my_shape {
+        Shape::Circle(r) => println!("This is a circle with radius {}", r);
+        Shape::Rectangle(w, h) => println!("This is rectangle");
+        Shape::Triangle(a, b, c) => println!("This is Triangle");
+    }
+}
+```
+
+- Match operator:
+  - Compares a value to a series of patterns to determine which code to execute (similar to switch statement)
+  - Can check enums or other values, e.g. u8
+
+```rust
+    let my_number = 1u8;
+
+    let result = match my_number {
+        0 => "zero";
+        1 => "one";
+        // Default wildcard syntax
+        // Can do multiple statements in one go with code block...
+        _ => {
+            println!("{my_number} did not match");
+            "default"
+        }
+    };
+
+    println!("Result is {}", result);
+```
+
+- Methods acting on enums:
+
+```rust
+// Using shape enum example from above
+
+impl Shape{
+    fn get_perimeter(&self) -> f64{
+        match self {
+            Shape::Circle(r) => r * 2.0 * std::f64::consts::PI, 
+            _ => 0, // to lazy to implement the others
+        }
+    }
+}
+```
+
+- Rust doesn't have a traditional `NULL` type
+- Uses an `Option<T> Enum`
+
+```rust
+// included in the prelude
+enum Option<T>{
+    Some(T),
+    None
+}
+
+let something1 = Some(13);
+let something2 = Some(13.0);
+
+let nothing1 = None;
+```
+
+- Example use might be getting an element of an array:
+
+```rust
+let countdown = [5,4,3,2,1];
+let number = countdown.get(5); // This returns an option enum, of value None, if a valid index then it will be a something Option value
+```
+
+- Use the `get()` method to return an option enum
+- Use the `unwrap()` method to extract the value from the something opetion
+- Use `unwrap_or(&value_if_none)` to be more safe incase the enum is none to stop runtime errors
+
+- `match` expression often used with Option enums:
+
+```rust
+let number = match number {
+    Some(number) => number + 1,
+    None => 0
+}
+```
+
