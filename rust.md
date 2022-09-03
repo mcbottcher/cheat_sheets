@@ -1014,3 +1014,52 @@ let s2 = match fs::read_to_string(f2) {
 }
 
 ```
+
+## Vector Datatype
+
+- `Vec<T>`
+- Collection of elements with the same datatype
+- Elements are stored in order
+- Different from array since they can be dynamically grown and shrunk -> stored on the heap
+- Access elements the same as arrays, with the `[i]`
+
+```rust 
+let mut astronauts: Vec<String> = Vec::new();
+astronauts.push(String::from("Shepard"));
+astronauts.pop(); // removes last push
+
+// Shorthand for creating a vector
+let countdown = vec![5,4,3,2,1];
+```
+
+## Hashmap
+
+- `HashMap<K, V>`
+- Stores data in key->value pairs
+- Use keys to lookup corresponding values
+- Cannot have duplicate keys
+
+```rust
+use std::collections::HashMap;
+
+fn main(){
+    let mut missions_flown = HashMap::new();
+    missions_flown.insert("Hadfield", 3);
+    
+    let mission = missions_flown.get("Hadfield"); // Returns option enum, None or Some
+
+    // Updating hash entries
+    //1.
+    missions_flown.insert("Hadfield", 1);
+
+    //2.
+    // If entry doesn't exist, then add it
+    missions_flown.entry("Hadfield").or_insert(2);
+
+    //3.
+    let my_var = missions_flown.entry("Hadfield").or_insert(0);
+    // Gets a reference to the hash map and modify it in memory
+    *my_var += 1;
+}
+```
+
