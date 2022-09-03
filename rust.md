@@ -999,3 +999,18 @@ let contents = match result {
         _ => String::from("Unhandled error")
     }
 };
+
+- Propagating Errors:
+  - use the `?` operator to propogate errors instead of using a match statement
+  - Can only use this in a function that returns a Result enum type
+
+```rust
+// This achieves the same as below, just a neater way to write it
+let mut s1 = fs::read_to_string(f1)?;
+
+let s2 = match fs::read_to_string(f2) {
+    Ok(s) => s,
+    Err(e) => return Err(e)
+}
+
+```
