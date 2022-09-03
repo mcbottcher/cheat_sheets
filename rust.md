@@ -955,3 +955,47 @@ if let Some(13) = number {
     println!("Thirteen");
 }
 ```
+
+## Error handling
+
+- Two types of error: Recoverable errors and unrecoverable errors
+  - Use the Result enum type for Recoverable errors: `Result<T,E>`
+  - Use the `panic!` macro for unrecoverable errors
+
+- Can enable to environment variable `RUST_BACKTRACE=1` to print backtrace on panic!
+
+- Result enum:
+
+```rust
+enum Result<T,E>{
+    Ok(T),
+    Err(E)
+}
+```
+
+- Can use the `.expect()` method to handle errors
+- Better method is to use a `match` expression to process result
+
+```rust
+let result = fs::read_to_string("my_file.txt");
+
+let contents = match result {
+    Ok(message) => message,
+    Err(error) => String::from("Error occured")
+};
+
+println!("Result is {}", contents);
+```
+
+- Check the `std::io::ErrorKind` enum to see different types of errors that can be returned
+
+```rust
+let result = fs::read_to_string("my_file.txt");
+
+let contents = match result {
+    Ok(message) => message,
+    Err(error) => match error.kind() {
+        io::ErrorKind::NotFound => String::from("File not found"),
+        _ => String::from("Unhandled error")
+    }
+};
