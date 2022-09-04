@@ -1063,3 +1063,18 @@ fn main(){
 }
 ```
 
+## Tests
+
+- You can run tests using `cargo test`
+
+```rust
+fn function_to_test() -> u8{
+    1u8
+}
+
+#[test]
+fn test_1(){
+    let expected_output = 1u8;
+    assert_eq!(expected_output, function_to_test());
+}
+```
