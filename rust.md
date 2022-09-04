@@ -1088,3 +1088,48 @@ fn main() {
     println!("{}", "Hello World".red().bold());
 }
 ```
+
+## Rust Modules
+
+- Split code into logical units (modules), and manage visibility (public/private)
+- A module is a collection of: functions, structs, traits, `impl` blocks and even other modules
+- By default items are private, can be overriden with the `pub` keyword so public items can be accessed from outside the module scope
+
+```rust
+// A module named `my_mod`
+mod my_mod {
+    // Items in modules default to private visibility.
+    fn private_function() {
+        println!("called `my_mod::private_function()`");
+    }
+
+    // Use the `pub` modifier to override default visibility.
+    pub fn function() {
+        println!("called `my_mod::function()`");
+    }
+
+    // Items can access other items in the same module,
+    // even when private.
+    pub fn indirect_access() {
+        print!("called `my_mod::indirect_access()`, that\n> ");
+        private_function();
+    }
+
+
+    // Modules can also be nested
+    pub mod nested {
+        pub fn function() {
+            println!("called `my_mod::nested::function()`");
+        }
+    }
+}
+
+fn main(){
+    my_mod::indirect_access();
+    my_mod::nested::function();
+}
+```
+
+## Misc
+
+- `#[allow(dead_code)]`: Stops warning about unused function
