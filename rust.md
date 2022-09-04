@@ -1078,3 +1078,13 @@ fn test_1(){
     assert_eq!(expected_output, function_to_test());
 }
 ```
+
+## Coloured output messages
+
+```rust
+use colored::*;
+
+fn main() {
+    println!("{}", "Hello World".red().bold());
+}
+```
