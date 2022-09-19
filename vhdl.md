@@ -107,3 +107,19 @@ end my_circuit_arc;
 
 ## Conditional Signal Assignment
 
+- Use the `when` `else` keywords
+- The individual conditions are evaluated sequentially in the conditional signal assignment statement until the first condition evaluates as true. In this case, the associated expression is evaluated and assigned to the target. Only one assignment is applied per assignment statement.
+
+```
+architecture f3_3 of my_ckt_f3 is
+begin
+    F3 <= '1' when (L = '0' AND M = '0' AND N = '1') else
+    '1' when (L = '1' AND M = '1') else
+    '0'; -- Catch all expression
+end f3_3;
+```
+
+- This uses realational operators:
+    - `=` is "is equal to"
+    - `\=` is "is not equal to"
+
