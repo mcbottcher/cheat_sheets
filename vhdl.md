@@ -123,3 +123,97 @@ end f3_3;
     - `=` is "is equal to"
     - `\=` is "is not equal to"
 
+## Selected Signal Assignment
+
+- Different from conditional assignment since it is only dependent on one expression
+
+```
+with <choose_expression> select
+    target <= <expression> when <choices>,
+              <expression> when <choices>;
+```
+
+```
+begin
+    with SEL select
+        MX_OUT <= D3 when "11",
+                D2 when "10",
+                D1 when "01",
+                D0 when "00",
+                '0' when others;
+end mux4t1_2;
+```
+
+## Process Statement
+
+```
+-- this is my first process
+my_label: process(sensitivity_list) is
+    <item_declaration>
+begin
+    <sequential_statements>
+end process my_label;
+```
+
+- Every time there is a change in the signals in the process sensitivity list, all the sequential statements in the process are re-evaluated.
+
+```
+-- library declaration
+library IEEE;
+use IEEE.std_logic_1164.all;
+-- entity
+entity my_xor is
+port ( A,B : in std_logic;
+       F   : out std_logic);
+end my_xor;
+-- architecture
+architecture behav of my_xor is
+begin
+    xor_proc: process(A,B) is
+    begin
+        F <= A XOR B;
+    end process xor_proc;
+end behav;
+```
+
+## Sequential if Statements
+
+```
+architecture mux_8to1_ce_arch of mux_8to1_ce is
+    begin
+    my_mux: process (Data_in,SEL,CE)
+    begin
+        if (CE = '0') then
+        F_CTRL <= '0';
+        else
+            if
+            (SEL = "111") then F_CTRL <= Data_in(7);
+            elsif (SEL = "110") then F_CTRL <= Data_in(6);
+            elsif (SEL = "101") then F_CTRL <= Data_in(5);
+            elsif (SEL = "100") then F_CTRL <= Data_in(4);
+            elsif (SEL = "011") then F_CTRL <= Data_in(3);
+            elsif (SEL = "010") then F_CTRL <= Data_in(2);
+            elsif (SEL = "001") then F_CTRL <= Data_in(1);
+            elsif (SEL = "000") then F_CTRL <= Data_in(0);
+            else F_CTRL <= '0';
+            end if;
+        end if;
+    end process my_mux;
+end mux_8to1_ce_arch;
+```
+
+## case Statement
+
+```
+case (expression) is
+    when choices =>
+        <sequential statements>
+    when choices =>
+        <sequential statements>
+    when others =>
+        <sequential statements>
+end case;
+```
+
+## VHDL Operators
+
