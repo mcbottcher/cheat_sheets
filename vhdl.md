@@ -217,3 +217,21 @@ end case;
 
 ## VHDL Operators
 
+- Logical: `and or nand nor xor xnor`
+- Relational: `= /= < <= > >=`, `/=` means not equal...
+- Shift: `sll srl sla sra rol ror`
+    - Shift Logical Left: Shift left and pad with zeros
+    - Shift Logical Right: Shift right and pad with zeros
+    - Shift left arithmetic: Shift left and pad with least significant bit
+    - Shift right arithmetic: Shift right and pad with most significant bit
+    - Rotate left: Roate left (most significant bit goes to least and rest are shifted)
+    - Rotate right: Roate right (least significant bit goes to most and rest are shifted)
+- Adding: `+ - &`
+    - Often used with numeric types
+    - `&` is the concatination operator: `C_val <= '1' & B_val & '0';`
+- Sign: `+ -`
+- Multiplying: `* / mod rem`
+- Miscellaneous: `** abs not`
+
+## Using VHDL for sequential circuits
+
