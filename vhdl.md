@@ -256,3 +256,68 @@ end my_d_ff;
 ```
 
 ## Finite State Machine
+
+```
+-- architecture
+architecture fsm1 of my_fsm1 is
+    type state_type is (ST0,ST1);
+    signal PS,NS : state_type;
+begin
+    sync_proc: process(CLK,NS,CLR)
+    begin
+        -- take care of the asynchronous input
+        if (CLR = '1') then
+            PS <= ST0;
+        elsif (rising_edge(CLK)) then
+            PS <= NS;
+        end if;
+    end process sync_proc;
+        
+    comb_proc: process(PS,TOG_EN)
+    begin
+        Z1 <= '0';
+        -- pre-assign output
+        case PS is
+            when ST0 =>
+                -- items regarding state ST0
+                Z1 <= '0'; -- Moore output
+                if (TOG_EN = '1') then NS <= ST1;
+                else NS <= ST0;
+                end if;
+            when ST1 =>
+                -- items regarding state ST1
+                Z1 <= '1'; -- Moore output
+                if (TOG_EN = '1') then NS <= ST0;
+                else NS <= ST1;
+                end if;
+            when others => -- the catch-all condition
+                Z1 <= '0'; -- arbitrary; it should never
+                NS <= ST0; -- make it to these two statements
+        end case;
+end process comb_proc;
+
+```
+
+## One hot encoding
+
+- This is how the states of the FSM are encoded.
+- One hot encoding is when each state has its own output line
+- e.g. 16 states = 16 output lines, with binary encoding only 4 are required.
+- Often leads to smaller and faster FSM
+
+- Changes needed to convert above example to one hot encoding
+
+```
+-- the approach for enumeration types
+type state_type is (ST0,ST1,ST2,ST3);
+signal PS,NS : state_type;
+----------------------------------------------------------------------
+-- the approach used for explicitly specifying state bit patterns
+type state_type is (ST0,ST1,ST2,ST3);
+attribute ENUM_ENCODING: STRING;
+attribute ENUM_ENCODING of state_type: type is "1000 0100 0010 0001";
+signal PS,NS : state_type;
+```
+
+## Structural modelling in VHDL
+
