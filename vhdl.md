@@ -321,3 +321,103 @@ signal PS,NS : state_type;
 
 ## Structural modelling in VHDL
 
+- Mapping ports of sub-level entities
+```
+-- library declaration
+library IEEE;
+use IEEE.std_logic_1164.all;
+-- entity
+entity my_compare is
+    Port ( A_IN: in std_logic_vector(2 downto 0);
+           B_IN: in std_logic_vector(2 downto 0);
+           EQ_OUT : out std_logic);
+end my_compare;
+-- architecture
+architecture ckt1 of my_compare is
+    -- XNOR gate --------------------
+    component big_xnor is
+        Port ( A,B : in std_logic;
+                F : out std_logic);
+    end component;
+    -- 3-input AND gate -------------
+    component big_and3 is
+        Port ( A,B,C : in std_logic;
+               F : out std_logic);
+    end component;
+    -- intermediate signal declaration
+    signal p1_out,p2_out,p3_out : std_logic;
+begin
+    x1: big_xnor port map (A => A_IN(2),
+    B => B_IN(2),
+    F => p1_out);
+
+    x2: big_xnor port map (A => A_IN(1),
+    B => B_IN(1),
+    F => p2_out);
+
+    x3: big_xnor port map (A => A_IN(0),
+    B => B_IN(0),
+    F => p3_out);
+
+    a1: big_and3 port map (A => p1_out,
+    B => p2_out,
+    C => p3_out,
+    F => EQ_OUT);
+end ckt1;
+```
+
+## Creating generic components
+
+- Use keyword `generic`
+- Can use this to change the size/behaviour/other properties of a component that you make...
+
+```
+-- library declarations
+library IEEE;
+use IEEE.std_logic_1164.all;
+-- entity
+entity gen_parity_check is
+generic ( n: positive);
+port
+( x: in std_logic_vector(n-1 downto 0);
+y: out std_logic);
+end gen_parity_check;
+-- architecture
+architecture arch of gen_parity_check is
+begin
+process(x)
+variable temp: std_logic;
+begin
+temp:='0';
+for i in x'range loop
+temp := temp XOR x(i);
+end loop;
+y <= temp;
+end process;
+end arch;
+```
+
+```
+-- library declaration
+library IEEE;
+use IEEE.std_logic_1164.all;
+-- entity
+entity my_parity_chk is
+Port ( input
+: in std_logic_vector(3 downto 0);
+output : out std_logic);
+end my_parity_chk;
+-- architecture
+architecture arch of my_parity_chk is
+--------------- component declaration --------------------
+component gen_parity_check is
+generic ( N : positive);
+port
+( X : in std_logic_vector(N-1 downto 0);
+Y : out std_logic);
+end component;
+begin
+-------------- component instantiation -------------------
+cp1: gen_parity_check generic map (4) port map (input, output);
+end arch;
+```
