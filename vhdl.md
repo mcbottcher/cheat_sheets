@@ -421,3 +421,36 @@ begin
 cp1: gen_parity_check generic map (4) port map (input, output);
 end arch;
 ```
+
+## Registers and RTL (Register Level Transfer)
+
+- A register in VHDL is a vector version of D-type flip flop
+- The RTL, is a flavour of design concerned with how and when data is transferred between various registers in a digital system
+
+## Data Objects
+
+- 4 types of data objects in VHDL: signals, variables, constants and files
+- files types are used only in simulations, cannot be implemented in silicon
+- signals vs variables: signals can be thought of as physical wires connecting different blocks in a design. Varibale assignment is instant but signal assignment may only happen after a process is completed
+
+## Looping Constructs
+
+- The purpose of loops is to allow some coding instructions to happen iteratively (over and over again)
+
+```
+my_label: fox index in a_range loop
+    sequential_statements...
+end loop my_label;
+```
+
+```
+my_label: while (condition) loop
+    sequential_statements...
+end loop my_label;
+```
+
+- Cannot make assignments to the loop index, but the loop index varible can be used in calculations
+- Can use the `next` and `exit` statements to control loops too
+    - `next` will bypass the rest of the code in the loop and start the next iteration
+    - `exit` will terminate the loop immediately
+
